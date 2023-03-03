@@ -1,0 +1,3 @@
+<button (click)="increment()">increment</button>
+<p *ngIf="counter < 10">{{ counter }}</p>
+<button (click)="decrement()" [disabled]="!counter">decrement</button>

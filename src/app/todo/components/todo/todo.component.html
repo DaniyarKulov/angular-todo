@@ -1,0 +1,23 @@
+<button (click)="addTodo()" [disabled]="!todoText">создать</button>
+<input type="text" [(ngModel)]="todoText" />
+<button (click)="increment()" [disabled]="disabledNext">вперед</button>
+<button (click)="decrement()" [disabled]="!currentPage">назад</button>
+<p>{{ currentPage }}</p>
+<ul>
+  <li *ngFor="let task of tasks">
+    <span *ngIf="!task.edit">{{ task.title }}</span>
+    <div *ngIf="task.edit">
+      <input type="text" [value]="task.title" #input />
+      <button (click)="submitEdit(input.value, task.id)">ок</button>
+    </div>
+    <input
+      (change)="toggleTask(task.id)"
+      type="checkbox"
+      [checked]="task.completed"
+    />
+    <button (click)="deleteTodo(task.id)">удалить</button>
+    <button (click)="task.edit = true" *ngIf="!task.edit">редактировать</button>
+  </li>
+</ul>
+
+<button (click)="deleteTasks()" *ngIf="tasks.length > 0">удалить все</button>
